@@ -1,0 +1,6 @@
+requests
+pytest
+pytest-html
+tenacity
+python-dotenv
+allure-pytest
