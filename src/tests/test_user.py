@@ -7,6 +7,7 @@ from typing import Generator
 # Get a logger instance
 logger = get_logger(__name__)
 
+
 @pytest.fixture(scope="module")
 def user_service() -> Generator[UserService, None, None]:
     """
@@ -16,6 +17,7 @@ def user_service() -> Generator[UserService, None, None]:
     """
     logger.info("Initializing UserService instance")
     yield UserService()
+
 
 @responses.activate
 def test_get_user(user_service: UserService) -> None:
@@ -31,8 +33,13 @@ def test_get_user(user_service: UserService) -> None:
     responses.add(
         responses.GET,
         url,
-        json={"id": user_id, "name": "John Doe", "email": "john.doe@example.com", "age": 30},
-        status=200
+        json={
+            "id": user_id,
+            "name": "John Doe",
+            "email": "john.doe@example.com",
+            "age": 30,
+        },
+        status=200,
     )
 
     logger.info(f"Testing GET user with ID: {user_id}")
@@ -41,6 +48,7 @@ def test_get_user(user_service: UserService) -> None:
 
     assert response.status_code == 200, f"Expected 200 but got {response.status_code}"
     logger.info(f"GET user test passed for user ID: {user_id}")
+
 
 @responses.activate
 def test_create_user(user_service: UserService) -> None:
@@ -53,12 +61,7 @@ def test_create_user(user_service: UserService) -> None:
     url = "http://localhost:5000/users"
 
     # Mocking the POST request
-    responses.add(
-        responses.POST,
-        url,
-        json={"id": 1, **user_data},
-        status=201
-    )
+    responses.add(responses.POST, url, json={"id": 1, **user_data}, status=201)
 
     logger.info("Testing CREATE user")
     logger.debug(f"User data being sent: {user_data}")
@@ -67,6 +70,7 @@ def test_create_user(user_service: UserService) -> None:
 
     assert response.status_code == 201, f"Expected 201 but got {response.status_code}"
     logger.info("CREATE user test passed")
+
 
 @responses.activate
 def test_update_user(user_service: UserService) -> None:
@@ -85,10 +89,7 @@ def test_update_user(user_service: UserService) -> None:
 
     # Mocking the PUT request
     responses.add(
-        responses.PUT,
-        url,
-        json={"id": user_id, **updated_user_data},
-        status=200
+        responses.PUT, url, json={"id": user_id, **updated_user_data}, status=200
     )
 
     logger.info(f"Testing UPDATE user with ID: {user_id}")
@@ -98,6 +99,7 @@ def test_update_user(user_service: UserService) -> None:
 
     assert response.status_code == 200, f"Expected 200 but got {response.status_code}"
     logger.info(f"UPDATE user test passed for user ID: {user_id}")
+
 
 @responses.activate
 def test_delete_user(user_service: UserService) -> None:
@@ -110,11 +112,7 @@ def test_delete_user(user_service: UserService) -> None:
     url = f"http://localhost:5000/users/{user_id}"
 
     # Mocking the DELETE request
-    responses.add(
-        responses.DELETE,
-        url,
-        status=204
-    )
+    responses.add(responses.DELETE, url, status=204)
 
     logger.info(f"Testing DELETE user with ID: {user_id}")
     response = user_service.delete_user(user_id)
