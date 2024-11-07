@@ -1,20 +1,150 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+#  Backend-Automation-Framework-Python Template
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+### Project Overview
+Welcome to **Backend-Automation-Framework-Python**! This project, developed by **Dimitry**, is a robust and extensible automation testing framework focused on backend and API testing. It offers a well-structured approach to functional, regression, and sanity testing of backend services.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+The framework leverages popular Python tools and libraries such as `pytest`, `requests`, and `allure` to provide a full suite of testing capabilities. By following best practices, such as modular architecture, comprehensive logging, and pre-commit hooks, the framework aims to be reusable, easy to maintain, and scalable.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+### Key Features
+- **Modular and Extensible Architecture**: Core components are divided into layers such as core services, utilities, and tests, ensuring high modularity and reusability.
+- **API Testing Support**: Easily test RESTful APIs using core and service classes.
+- **CI/CD Integration**: GitHub Actions (`ci_cd_pipeline.yml`) included for automated testing and deployment.
+- **Pre-commit Hooks**: Uses `.pre-commit-config.yaml` to maintain code quality standards.
+- **Logging and Reporting**: Integrated logging for debugging and detailed test reports using `allure`.
+- **Retry Mechanisms**: Transient errors are automatically retried using the `tenacity` library.
+- **Mocking API Responses**: Utilizes `responses` library for mocking HTTP requests during testing, ensuring tests are independent of the backend server.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+### Project Structure
+
+The **Backend-Automation-Framework-Python** project structure follows best practices to separate concerns and promote maintainability:
+
+```
+Backend-Automation-Framework-Python/
+|-- config/
+|   |-- environment_config.json  # Environment-specific configurations
+|-- data/
+|   |-- test_data.json           # Test data files
+|-- logs/
+|   |-- automation.log           # Log files
+|-- reports/
+|   |-- allure-report/           # Test reports
+|-- .github/
+|   |-- workflows/
+|       |-- ci_cd_pipeline.yml   # GitHub Actions workflow for CI/CD pipeline
+|-- src/
+|   |-- core/
+|   |   |-- api_client.py        # Core API client for making requests
+|   |-- services/
+|   |   |-- user_service.py      # Service classes for different API endpoints
+|   |   |-- product_service.py   # Service classes for different API endpoints
+|   |-- tests/
+|   |   |-- test_user.py         # Test cases for User-related functionality
+|   |   |-- test_product.py      # Test cases for Product-related functionality
+|   |-- utils/
+|   |   |-- logger.py            # Custom logger implementation
+|   |   |-- data_utils.py        # Utility functions for data handling
+|   |   |-- config_loader.py     # Utility for dynamic configuration loading
+|-- .gitignore                   # Git ignore file
+|-- requirements.txt             # Project dependencies
+|-- .pre-commit-config.yaml      # Pre-commit hooks configuration file
+|-- Dockerfile                   # Dockerfile for containerizing the framework
+|-- docker-compose.yml           # Docker Compose configuration
+```
+
+### Requirements
+The following dependencies are used in the framework and can be installed using `requirements.txt`:
+
+```
+requests==2.28.1
+pytest==7.1.2
+pytest-html==3.2.0
+tenacity==8.0.1
+python-dotenv==1.0.0
+allure-pytest==2.9.45
+responses==0.20.0
+pre-commit==3.0.4
+```
+To install the dependencies, use the following command:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Getting Started
+1. **Clone the Repository**:
+   ```bash
+   git clone <repository-url>
+   cd Backend-Automation-Framework-Python
+   ```
+
+2. **Set up Virtual Environment**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # On Windows use: venv\Scripts\activate
+   ```
+
+3. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run Tests**:
+   - Run all tests:
+     ```bash
+     pytest src/tests --alluredir=reports/allure-results
+     ```
+   - View detailed test reports generated by Allure:
+     ```bash
+     allure serve reports/allure-results
+     ```
+
+### Running Pre-commit Hooks
+To maintain coding standards, install the pre-commit hooks defined in `.pre-commit-config.yaml`:
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+This will ensure that every time you commit, the code is checked for formatting issues, linting errors, and any other checks defined in `.pre-commit-config.yaml`.
+
+### Using Docker
+The project can be containerized using Docker to ensure consistency across different environments.
+
+1. **Build the Docker Image**:
+   ```bash
+   docker build -t backend-automation-framework-python .
+   ```
+
+2. **Run the Docker Container**:
+   ```bash
+   docker run -it backend-automation-framework-python
+   ```
+
+3. **Using Docker Compose**:
+   You can also use Docker Compose to manage the services more easily:
+   ```bash
+   docker-compose up
+   ```
+
+### CI/CD Pipeline
+The project integrates with **GitHub Actions** for CI/CD. The workflow defined in `.github/workflows/ci_cd_pipeline.yml` performs the following:
+- Runs tests on every push or pull request to the `main` branch.
+- Generates reports and artifacts for easy review.
+- Deploys to the server (if defined in the pipeline).
+
+### Contributing
+If you would like to contribute:
+- Fork the repository.
+- Create a feature branch (`git checkout -b feature/your-feature`).
+- Commit your changes (`git commit -m 'Add some feature'`).
+- Push to the branch (`git push origin feature/your-feature`).
+- Open a Pull Request.
+
+### Author
+**Dimitry**
+
+### License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+### Contact
+If you have any questions, feel free to reach out to Dimitry.

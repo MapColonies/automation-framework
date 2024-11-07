@@ -1,6 +1,9 @@
-requests
+allure-pytest
+pre-commit
 pytest
 pytest-html
-tenacity
 python-dotenv
-allure-pytest
+requests
+responses
+tenacity
+types-requests

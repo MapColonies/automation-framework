@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  automation-framework:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend_automation_framework
+    environment:
+      - API_BASE_URL=http://example.com/api  # Environment-specific configuration for API base URL
+    volumes:
+      - ./logs:/app/logs                     # Persist logs outside the container
+      - ./reports:/app/reports               # Persist reports outside the container
+    command: ["pytest", "src/tests", "--html=reports/report.html", "--self-contained-html"]
+    depends_on:
+      - mock-server
+    networks:
+      - backend_network
+
+  mock-server:
+    image: jsonserver/json-server
+    container_name: mock_server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./mock-data/db.json:/data/db.json    # Mock data for testing
+    networks:
+      - backend_network
+
+networks:
+  backend_network:
+    driver: bridge

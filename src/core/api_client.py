@@ -1,23 +1,32 @@
 import requests
+from requests import Response
 from requests.exceptions import RequestException
 from tenacity import retry, stop_after_attempt, wait_fixed
-from utils.logger import get_logger
-from utils.config_loader import get_config_value
+
+from src.utils.logger import get_logger
+from typing import Optional, Dict, Any
 
 # Get a logger instance
 logger = get_logger(__name__)
 
 
 class APIClient:
-    def __init__(self, base_url):
-        self.base_url = base_url
-        self.headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+    def __init__(self, base_url: str) -> None:
+        self.base_url: str = base_url
+        self.headers: Dict[str, str] = {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
         }
 
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
-    def make_request(self, method, endpoint, params=None, data=None, headers=None):
+    def make_request(
+        self,
+        method: str,
+        endpoint: str,
+        params: Optional[Dict[str, Any]] = None,
+        data: Optional[Dict[str, Any]] = None,
+        headers: Optional[Dict[str, str]] = None,
+    ) -> Response:
         """
         Make an HTTP request with retry logic.
 
@@ -32,14 +41,16 @@ class APIClient:
         request_headers = headers if headers else self.headers
 
         try:
-            response = requests.request(method, url, params=params, json=data, headers=request_headers)
+            response = requests.request(
+                method, url, params=params, json=data, headers=request_headers
+            )
             response.raise_for_status()
             return response
         except RequestException as e:
             logger.error(f"Request failed: {e}")
             raise
 
-    def get(self, endpoint, params=None):
+    def get(self, endpoint: str, params: Optional[Dict[str, Any]] = None) -> Response:
         """
         Make a GET request.
 
@@ -47,9 +58,9 @@ class APIClient:
         :param params: Query parameters
         :return: Response object
         """
-        return self.make_request('GET', endpoint, params=params)
+        return self.make_request("GET", endpoint, params=params)
 
-    def post(self, endpoint, data=None):
+    def post(self, endpoint: str, data: Optional[Dict[str, Any]] = None) -> Response:
         """
         Make a POST request.
 
@@ -57,9 +68,9 @@ class APIClient:
         :param data: Request payload
         :return: Response object
         """
-        return self.make_request('POST', endpoint, data=data)
+        return self.make_request("POST", endpoint, data=data)
 
-    def put(self, endpoint, data=None):
+    def put(self, endpoint: str, data: Optional[Dict[str, Any]] = None) -> Response:
         """
         Make a PUT request.
 
@@ -67,9 +78,11 @@ class APIClient:
         :param data: Request payload
         :return: Response object
         """
-        return self.make_request('PUT', endpoint, data=data)
+        return self.make_request("PUT", endpoint, data=data)
 
-    def delete(self, endpoint, params=None):
+    def delete(
+        self, endpoint: str, params: Optional[Dict[str, Any]] = None
+    ) -> Response:
         """
         Make a DELETE request.
 
@@ -77,7 +90,7 @@ class APIClient:
         :param params: Query parameters
         :return: Response object
         """
-        return self.make_request('DELETE', endpoint, params=params)
+        return self.make_request("DELETE", endpoint, params=params)
 
 
 # Usage example
