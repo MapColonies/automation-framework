@@ -3,7 +3,7 @@ version: '3.9'
 services:
   automation-framework:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
     container_name: backend_automation_framework
     environment:

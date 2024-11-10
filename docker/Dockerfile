@@ -9,13 +9,13 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Copy requirements file to the container
-COPY requirements.txt /app/requirements.txt
+COPY ../requirements.txt /app/requirements.txt
 
 # Install dependencies
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy the entire project directory into the container
-COPY . /app
+COPY .. /app
 
 # Install pre-commit hooks
 RUN pip install pre-commit && pre-commit install

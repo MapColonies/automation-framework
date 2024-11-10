@@ -26,7 +26,9 @@ def get_config_value(key: str, default: Optional[Any] = None) -> Optional[str]:
     try:
         value = os.getenv(key, default)
         if value is None:
-            logger.warning(f"Config key '{key}' not found. Using default value: {default}")
+            logger.warning(
+                f"Config key '{key}' not found. Using default value: {default}"
+            )
         return value
     except Exception as e:
         logger.error(f"Error accessing environment variable '{key}': {str(e)}")
