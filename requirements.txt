@@ -1,4 +1,5 @@
 allure-pytest
+jsonschema
 pre-commit
 pytest
 pytest-html
@@ -6,4 +7,5 @@ python-dotenv
 requests
 responses
 tenacity
+toml
 types-requests

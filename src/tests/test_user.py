@@ -1,11 +1,21 @@
 import pytest
 import responses
+import json
+import os
+from jsonschema import validate, ValidationError
 from src.services.user_service import UserService
 from src.utils.logger import get_logger
 from typing import Generator
 
 # Get a logger instance
 logger = get_logger(__name__)
+
+# Load expected schema for user
+schema_path = os.path.join(
+    os.path.dirname(__file__), "..", "..", "schemas", "user_schema.json"
+)
+with open(schema_path, "r") as f:
+    USER_SCHEMA = json.load(f)
 
 
 @pytest.fixture(scope="module")
@@ -46,6 +56,16 @@ def test_get_user(user_service: UserService) -> None:
     response = user_service.get_user(user_id)
     logger.debug(f"Response received: {response.status_code}, {response.json()}")
 
+    # Validate response schema
+    try:
+        validate(instance=response.json(), schema=USER_SCHEMA)
+        logger.info(
+            f"GET user response schema validation passed for user ID: {user_id}"
+        )
+    except ValidationError as e:
+        logger.error(f"GET user response schema validation failed: {e}")
+        pytest.fail(f"Schema validation failed: {e}")
+
     assert response.status_code == 200, f"Expected 200 but got {response.status_code}"
     logger.info(f"GET user test passed for user ID: {user_id}")
 
@@ -67,6 +87,14 @@ def test_create_user(user_service: UserService) -> None:
     logger.debug(f"User data being sent: {user_data}")
     response = user_service.create_user(user_data)
     logger.debug(f"Response received: {response.status_code}, {response.json()}")
+
+    # Validate response schema
+    try:
+        validate(instance=response.json(), schema=USER_SCHEMA)
+        logger.info("CREATE user response schema validation passed")
+    except ValidationError as e:
+        logger.error(f"CREATE user response schema validation failed: {e}")
+        pytest.fail(f"Schema validation failed: {e}")
 
     assert response.status_code == 201, f"Expected 201 but got {response.status_code}"
     logger.info("CREATE user test passed")
@@ -96,6 +124,16 @@ def test_update_user(user_service: UserService) -> None:
     logger.debug(f"Updated user data being sent: {updated_user_data}")
     response = user_service.update_user(user_id, updated_user_data)
     logger.debug(f"Response received: {response.status_code}, {response.json()}")
+
+    # Validate response schema
+    try:
+        validate(instance=response.json(), schema=USER_SCHEMA)
+        logger.info(
+            f"UPDATE user response schema validation passed for user ID: {user_id}"
+        )
+    except ValidationError as e:
+        logger.error(f"UPDATE user response schema validation failed: {e}")
+        pytest.fail(f"Schema validation failed: {e}")
 
     assert response.status_code == 200, f"Expected 200 but got {response.status_code}"
     logger.info(f"UPDATE user test passed for user ID: {user_id}")
