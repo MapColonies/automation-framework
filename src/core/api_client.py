@@ -5,7 +5,11 @@ from tenacity import retry, stop_after_attempt, wait_fixed
 
 from src.utils.logger import get_logger
 from typing import Optional, Dict, Any
-from src.core.exceptions import APIRequestError, APITimeoutError, APIClientError
+from src.core.exceptions.api_exceptions import (
+    APIRequestError,
+    APITimeoutError,
+    APIClientError,
+)
 
 # Get a logger instance
 logger = get_logger(__name__)
