@@ -1,5 +1,9 @@
 #  Backend-Automation-Framework-Python Template
 
+### TL;DR
+A modular Python-based backend automation testing framework featuring API testing support, retry mechanisms, CI/CD integration, and Docker compatibility.
+
+
 ### Project Overview
 Welcome to **Backend-Automation-Framework-Python**! This project, developed by **Dimitry**, is a robust and extensible automation testing framework focused on backend and API testing. It offers a well-structured approach to functional, regression, and sanity testing of backend services.
 
@@ -13,62 +17,6 @@ The framework leverages popular Python tools and libraries such as `pytest`, `re
 - **Logging and Reporting**: Integrated logging for debugging and detailed test reports using `allure`.
 - **Retry Mechanisms**: Transient errors are automatically retried using the `tenacity` library.
 - **Mocking API Responses**: Utilizes `responses` library for mocking HTTP requests during testing, ensuring tests are independent of the backend server.
-
-### Project Structure
-
-The **Backend-Automation-Framework-Python** project structure follows best practices to separate concerns and promote maintainability:
-
-```
-Backend-Automation-Framework-Python/
-|-- config/
-|   |-- environment_config.json  # Environment-specific configurations
-|-- data/
-|   |-- test_data.json           # Test data files
-|-- logs/
-|   |-- automation.log           # Log files
-|-- reports/
-|   |-- allure-report/           # Test reports
-|-- .github/
-|   |-- workflows/
-|       |-- ci_cd_pipeline.yml   # GitHub Actions workflow for CI/CD pipeline
-|-- src/
-|   |-- core/
-|   |   |-- api_client.py        # Core API client for making requests
-|   |-- services/
-|   |   |-- user_service.py      # Service classes for different API endpoints
-|   |   |-- product_service.py   # Service classes for different API endpoints
-|   |-- tests/
-|   |   |-- test_user.py         # Test cases for User-related functionality
-|   |   |-- test_product.py      # Test cases for Product-related functionality
-|   |-- utils/
-|   |   |-- logger.py            # Custom logger implementation
-|   |   |-- data_utils.py        # Utility functions for data handling
-|   |   |-- config_loader.py     # Utility for dynamic configuration loading
-|-- .gitignore                   # Git ignore file
-|-- requirements.txt             # Project dependencies
-|-- .pre-commit-config.yaml      # Pre-commit hooks configuration file
-|-- Dockerfile                   # Dockerfile for containerizing the framework
-|-- docker-compose.yml           # Docker Compose configuration
-```
-
-### Requirements
-The following dependencies are used in the framework and can be installed using `requirements.txt`:
-
-```
-requests==2.28.1
-pytest==7.1.2
-pytest-html==3.2.0
-tenacity==8.0.1
-python-dotenv==1.0.0
-allure-pytest==2.9.45
-responses==0.20.0
-pre-commit==3.0.4
-```
-To install the dependencies, use the following command:
-
-```bash
-pip install -r requirements.txt
-```
 
 ### Getting Started
 1. **Clone the Repository**:
@@ -117,7 +65,7 @@ The project can be containerized using Docker to ensure consistency across diffe
 
 2. **Run the Docker Container**:
    ```bash
-   docker run -it backend-automation-framework-python
+   docker run -it -v $(pwd):/app -p 5000:5000 backend-automation-framework-python
    ```
 
 3. **Using Docker Compose**:
