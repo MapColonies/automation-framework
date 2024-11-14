@@ -30,7 +30,7 @@ jobs:
         run: pytest --alluredir=reports/allure-results
 
       - name: Upload Allure Results
-        uses: actions/upload-artifact@v2  # This is deprecated
+        uses: actions/upload-artifact@v3  # Updated to v3
         with:
           name: allure-results
           path: reports/allure-results
