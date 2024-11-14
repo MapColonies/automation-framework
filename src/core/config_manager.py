@@ -5,7 +5,7 @@ import toml
 from typing import Any, Dict, Optional
 from dotenv import load_dotenv
 import logging
-from src.core.exceptions.exceptions import JSONParsingError, ConfigError
+from src.core.exceptions.config_exceptions import JSONParsingError, ConfigError
 
 # Load environment variables from a .env file if present
 load_dotenv()

@@ -5,7 +5,7 @@ from tenacity import retry, stop_after_attempt, wait_fixed
 
 from src.utils.logger import get_logger
 from typing import Optional, Dict, Any
-from src.core.exceptions.exceptions import (
+from src.core.exceptions.api_exceptions import (
     APIRequestError,
     APITimeoutError,
     APIClientError,
