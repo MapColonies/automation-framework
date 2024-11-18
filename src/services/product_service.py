@@ -1,6 +1,6 @@
 from src.core.api_client import APIClient
 from src.utils.logger import get_logger
-from src.utils.config_loader import get_config_value
+from src.utils.config.config_loader import get_config_value
 from typing import Optional, Dict, Any
 from requests import Response
 

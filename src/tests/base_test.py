@@ -1,7 +1,7 @@
 import pytest
 import logging
 from src.core.api_client import APIClient
-from src.utils.config_loader import get_config_value
+from src.utils.config.config_loader import get_config_value
 from typing import Any
 
 # Setting up a logger
