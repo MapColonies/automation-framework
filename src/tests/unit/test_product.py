@@ -1,11 +1,13 @@
-import pytest
-import responses
 import json
 from pathlib import Path
-from jsonschema import validate, ValidationError
+from typing import Generator
+
+import pytest
+import responses
+from jsonschema import ValidationError, validate
+
 from src.services.product_service import ProductService
 from src.utils.logger import get_logger
-from typing import Generator
 
 # Get a logger instance
 logger = get_logger(__name__)

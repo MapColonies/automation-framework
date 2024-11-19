@@ -1,7 +1,8 @@
-import pytest
 import logging
 import os
 from datetime import datetime
+
+import pytest
 
 
 def pytest_configure(config):

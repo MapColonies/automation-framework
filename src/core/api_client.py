@@ -1,15 +1,16 @@
+from typing import Any, Dict, Optional
+
 import requests
 from requests import Response
-from requests.exceptions import HTTPError, Timeout, RequestException
+from requests.exceptions import HTTPError, RequestException, Timeout
 from tenacity import retry, stop_after_attempt, wait_fixed
 
-from src.utils.logger import get_logger
-from typing import Optional, Dict, Any
 from src.core.exceptions.api_exceptions import (
+    APIClientError,
     APIRequestError,
     APITimeoutError,
-    APIClientError,
 )
+from src.utils.logger import get_logger
 
 # Get a logger instance
 logger = get_logger(__name__)

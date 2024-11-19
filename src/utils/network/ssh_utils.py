@@ -1,6 +1,7 @@
-import paramiko
 import logging
 from typing import Optional
+
+import paramiko
 
 # Set up logger
 logger = logging.getLogger(__name__)

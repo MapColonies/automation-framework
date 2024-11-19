@@ -1,0 +1,48 @@
+# Ignore virtual environments
+.venv/
+venv/
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ignore logs and temporary files
+*.log
+logs/
+
+# Ignore Docker configuration files
+docker-compose.override.yml
+
+# Ignore configuration files
+.idea/
+*.swp
+
+# Ignore Git and version control files
+.git/
+.gitignore
+
+# Ignore IDE configuration files
+*.iml
+*.vscode/
+*.suo
+*.user
+*.workspace
+
+# Ignore Python dependencies
+*.egg-info/
+.eggs/
+*.whl
+pip-log.txt
+
+# Ignore build artifacts
+build/
+dist/
+*.spec
+
+# Ignore pre-commit config cache
+.pre-commit-config.yaml
+
+# Ignore temporary folders
+temp/

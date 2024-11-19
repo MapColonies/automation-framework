@@ -1,8 +1,10 @@
-from src.core.api_client import APIClient
-from src.utils.logger import get_logger
-from src.utils import ConfigLoader
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
+
 from requests import Response
+
+from src.core.api_client import APIClient
+from src.utils import ConfigLoader
+from src.utils.logger import get_logger
 
 # Get a logger instance
 logger = get_logger(__name__)

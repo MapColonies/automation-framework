@@ -1,8 +1,10 @@
-import pytest
 import logging
+from typing import Any
+
+import pytest
+
 from src.core.api_client import APIClient
 from src.utils import ConfigLoader
-from typing import Any
 
 # Setting up a logger
 logger = logging.getLogger(__name__)
