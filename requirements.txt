@@ -1,5 +1,6 @@
 allure-pytest
 jsonschema
+paramiko
 pre-commit
 pytest
 pytest-html

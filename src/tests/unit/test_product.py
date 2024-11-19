@@ -1,7 +1,7 @@
 import pytest
 import responses
-import os
 import json
+from pathlib import Path
 from jsonschema import validate, ValidationError
 from src.services.product_service import ProductService
 from src.utils.logger import get_logger
@@ -10,10 +10,10 @@ from typing import Generator
 # Get a logger instance
 logger = get_logger(__name__)
 
-# Load expected schema for product
-schema_path = os.path.join(
-    os.path.dirname(__file__), "..", "..", "schemas", "product_schema.json"
-)
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent.parent
+
+schema_path = ROOT_DIR / "schemas" / "product_schema.json"
+
 with open(schema_path, "r") as f:
     PRODUCT_SCHEMA = json.load(f)
 
