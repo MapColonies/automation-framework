@@ -1,7 +1,7 @@
 import pytest
 import logging
 from src.core.api_client import APIClient
-from src.utils.config_loader import get_config_value
+from src.utils import ConfigLoader
 from typing import Any
 
 # Setting up a logger
@@ -26,7 +26,9 @@ class BaseTest:
         logger.info(f"Setting up test class: {request.cls.__name__}")
 
         # Initialize API client with base URL from configuration
-        base_url = get_config_value("API_BASE_URL", "http://localhost:5000")
+        base_url = ConfigLoader.get_config_value(
+            "API_BASE_URL", "http://localhost:5000"
+        )
         request.cls.api_client = APIClient(base_url)
 
     @pytest.fixture(scope="function", autouse=True)

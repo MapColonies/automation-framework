@@ -1,6 +1,6 @@
 from src.core.api_client import APIClient
 from src.utils.logger import get_logger
-from src.utils.config_loader import get_config_value
+from src.utils import ConfigLoader
 from typing import Optional, Dict, Any
 from requests import Response
 
@@ -11,7 +11,9 @@ logger = get_logger(__name__)
 class UserService:
     def __init__(self, api_client: Optional[APIClient] = None) -> None:
         self.api_client: APIClient = api_client or APIClient(
-            base_url=get_config_value("API_BASE_URL", "http://localhost:5000")
+            base_url=ConfigLoader.get_config_value(
+                "API_BASE_URL", "http://localhost:5000"
+            )
         )
         self.endpoint: str = "/users"
 
