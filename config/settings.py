@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Determine the environment (default to 'dev')
-ENV = os.getenv('ENV', 'dev').lower()
+ENV = os.getenv("ENV", "dev").lower()
 
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), f"{ENV}.ini")
 

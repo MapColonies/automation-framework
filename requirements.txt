@@ -1,4 +1,5 @@
 allure-pytest
+dotenv
 jsonschema
 paramiko
 pre-commit
@@ -10,4 +11,3 @@ responses
 tenacity
 toml
 types-requests
-dotenv
