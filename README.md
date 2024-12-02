@@ -74,6 +74,22 @@ The project can be containerized using Docker to ensure consistency across diffe
    docker-compose up
    ```
 
+### Configuration
+
+This project uses `.ini` files for environment-specific configurations.
+
+### Available Environments
+- `dev` (Development)
+- `staging` (Staging)
+- `prod` (Production)
+
+### Switching Environments
+Set the `ENV` variable to the desired environment:
+
+```bash
+ENV=dev python src/app.py
+```
+
 ### CI/CD Pipeline
 The project integrates with **GitHub Actions** for CI/CD. The workflow defined in `.github/workflows/ci_cd_pipeline.yml` performs the following:
 - Runs tests on every push or pull request to the `main` branch.

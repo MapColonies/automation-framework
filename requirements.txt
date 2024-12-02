@@ -10,3 +10,4 @@ responses
 tenacity
 toml
 types-requests
+dotenv
